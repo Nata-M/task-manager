@@ -1,0 +1,53 @@
+<div class="main-container">
+  <div class="inner-container">
+    <div class="list">
+      <div class="list-item">Title</div>
+      <div class="title-container" *ngFor="let item of titleArr">
+        <div class="titles">{{ item.text }}</div>
+      </div>
+      <button (click)="addNewTitle()" class="new-item">+ Add New</button>
+    </div>
+    <div class="content">
+      <div class="text">Tasks</div>
+      <div cdkDropListGroup>
+        <div
+          cdkDropList
+          [cdkDropListData]="newArr"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of newArr; let index = index">
+            <div class="tasks-text" cdkDrag>
+              {{ item.text }}
+              <div class="img-container">
+                <mat-icon (click)="editTask(index)">edit</mat-icon>
+                <mat-icon (click)="deleteTask(index)">delete</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="handleClick()" class="plus">+</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="state" class="background-container">
+  <div class="message-container">
+    <div class="txt">Create a new task</div>
+    <input #inputValue type="text" placeholder="Enter task text..." />
+    <div class="btn-container">
+      <button (click)="addItem()" class="create">Create</button>
+      <button (click)="state = false" class="cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="title" class="background-container">
+  <div class="message-container">
+    <div class="txt">Create a new title</div>
+    <input #inputVal type="text" placeholder="Enter title name..." />
+    <div class="btn-container">
+      <button (click)="createTitle()" class="create">Create</button>
+      <button (click)="title = false" class="cancel">Cancel</button>
+    </div>
+  </div>
+</div>
