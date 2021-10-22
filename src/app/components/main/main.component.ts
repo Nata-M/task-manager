@@ -9,7 +9,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class MainComponent implements OnInit {
   @ViewChild('inputValue') value: ElementRef | undefined;
   @ViewChild('inputVal') val: ElementRef | undefined;
-
+  open: any;
   state = false;
   status: any; 
   title = false;
@@ -20,12 +20,13 @@ export class MainComponent implements OnInit {
   handleClick() {
     this.state = true;
   }
+
   newArr = [
     {text: 'create new arr'},
     {text: 'Create new task'},
     {text: 'create neSDsd'},
     {text: 'Create new dsds'}
-  ]
+  ];
   titleArr = [
     {text: 'Holiday'},
     {text: 'Meeting'},
@@ -34,6 +35,7 @@ export class MainComponent implements OnInit {
   addItem() {
     this.state = false;
     this.newArr.push({text: this.value?.nativeElement.value});
+    localStorage.setItem('myLSkey', JSON.stringify(this.newArr));
   }
   addNewTitle() {
     this.title = true;
@@ -58,5 +60,11 @@ drop(event: CdkDragDrop<any>) {
                       event.previousIndex,
                       event.currentIndex);
   }
+}
+openTasks(index: any) {
+  this.open = index;
+  localStorage.setItem('myLSkey', JSON.stringify(this.newArr));
+  let indexData = JSON.parse(localStorage.getItem('myLSkey')|| '{}');
+  console.log(indexData);
 }
 }

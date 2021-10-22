@@ -2,8 +2,17 @@
   <div class="inner-container">
     <div class="list">
       <div class="list-item">Title</div>
-      <div class="title-container" *ngFor="let item of titleArr">
-        <div class="titles">{{ item.text }}</div>
+      <div cdkDropListGroup>
+        <div cdkDropList
+        [cdkDropListData]="titleArr"
+        class="example-list title-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="title-container" *ngFor="let item of titleArr; let index = index;">
+          <div (click)="openTasks(index)" cdkDrag>
+            <div [ngClass]="index === open ? 'titles open' : 'titles'">{{ item.text }}</div>
+          </div>
+        </div>
+        </div>
       </div>
       <button (click)="addNewTitle()" class="new-item">+ Add New</button>
     </div>
@@ -14,10 +23,9 @@
           cdkDropList
           [cdkDropListData]="newArr"
           class="example-list"
-          (cdkDropListDropped)="drop($event)"
-        >
+          (cdkDropListDropped)="drop($event)">
           <div *ngFor="let item of newArr; let index = index">
-            <div class="tasks-text" cdkDrag>
+            <div cdkDrag>
               {{ item.text }}
               <div class="img-container">
                 <mat-icon (click)="editTask(index)">edit</mat-icon>
