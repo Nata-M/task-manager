@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
   @ViewChild('inputVal') val: ElementRef | undefined;
   open: any;
   state = false;
+  titleState = false;
   status: any; 
   title = false;
 
@@ -49,6 +50,9 @@ export class MainComponent implements OnInit {
 }
 editTask(index: any) {
   this.state = true;
+}
+deleteTitle(index: any) {
+  this.titleArr.splice(index, 1);
 }
 
 drop(event: CdkDragDrop<any>) {

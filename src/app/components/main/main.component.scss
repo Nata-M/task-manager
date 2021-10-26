@@ -50,22 +50,27 @@
                 .titles {
                     display: flex;
                     width: 180px;
+                    justify-content: space-between;
                     padding: 10px;
                     border-radius: 3px;
                     background-color: rgb(247, 247, 247);
                     font-family: 'Open Sans', sans-serif;
                     cursor: pointer;
                     margin-bottom: 8px;
-                    min-height: 24px;
+                    // min-height: 24px;
                     flex-wrap: wrap;
+                    align-items: center;
+                    mat-icon {
+                        color: #fff;
+                    }
                     &:hover {
                         background-color:rgb(141, 216, 187);
                         color: #fff;
                     }
-                }
-                .open {
-                    background-color: rgb(141, 216, 187);
-                    color: #fff;
+                    &.open {
+                        background-color: rgb(141, 216, 187);
+                        color: #fff;
+                    }
                 }
             }
             .new-item {
@@ -262,11 +267,18 @@
           padding: 0;
           margin: 0;
           box-shadow: none;
+          min-height: 24px;
+          &:not(.complete){
+            &:hover {
+                box-shadow: none;
+            }
+       }
       }
       .cdk-drag-preview {
           padding: 0;
           margin: 0;
-          height: 24px;
+          min-height: 24px;
+          box-shadow: none !important;
       }
   }
   .cdk-drag {
@@ -274,26 +286,39 @@
       padding: 10px 10px 10px 20px;
       box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
       border-radius: 4px;
-      cursor: pointer;
       font-family: 'Open Sans', sans-serif;
       color: rgb(36, 30, 48);
       margin-bottom: 10px;
       display: flex;
+      cursor: pointer;
       align-items: center;
       justify-content: space-between;
       box-sizing: border-box;
-    &:hover {
-        transition: 0.3s;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        background-color:rgb(141, 216, 187);
-                        color: #fff;
+
+    &:not(.complete){
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        &:hover {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+        &:active {
+            transform: scale(0.95);
+        }
+   }
+   &.complete {
+       text-decoration: line-through;
+       color: green;
    }
     &:hover .img-container{
         visibility: visible;
     }
     .img-container {
         visibility: hidden;
+        display: flex;
         mat-icon{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
             font-size: 16px;
             color: rgb(87, 84, 84);
         }
